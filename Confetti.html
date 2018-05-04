@@ -10,21 +10,20 @@
             overflow: hidden
         }
 
-        body {
-            cursor: pointer;
-        }
-
         #canvas {
             height: 23em !important;
             width: 26em !important;
+            -webkit-filter: blur(2px);
         }
 
     </style>
 </head>
 
 <body>
-    <canvas id="canvas"></canvas>
-
+    <div class="wrapper">
+        <h2>Your Output</h2>
+        <canvas id="canvas"></canvas>
+    </div>
 </body>
 
 <script>
@@ -35,6 +34,9 @@
     // const dpr = window.devicePixelRatio || 1;
     const dpr = .5;
     const ctx = canvas.getContext('2d');
+    ctx.font = '48px serif';
+    ctx.textAlign = 'left';
+    ctx.strokeText('Choice Output', 0, 100);
 
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;

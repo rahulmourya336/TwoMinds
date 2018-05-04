@@ -4,7 +4,7 @@
     src: url("https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,400b");
 }
 
-$helper_font_size: em(3);
+$helper_font_size: 14px;
 $container_width: 80%;
 $interaction_width: 50%;
 $instruction_width: 50%;
@@ -16,7 +16,7 @@ $instruction_width: 50%;
     font-family: 'Roboto', sans-serif;
     padding: 2px;
     margin: 1px;
-    border: 1px solid;
+    margin: 0 auto;
 }
 
 #helper-text{
@@ -29,8 +29,9 @@ $instruction_width: 50%;
     
 }
 
-.instruction{
+.instructions{
     width: $instruction_width;
+    
 }
 
 .interaction{
