@@ -48,20 +48,27 @@
 	<!-- experimental code  -->
 	<div id="container">
 		<div class="instructions">
-			<img src="" alt="logo" />
+			<img src="http://via.placeholder.com/350x150" alt="logo" />
 			<h2 class="instructions"> Select the choice type?</h2>
 		</div>
 		<div class="interaction">
-		<form action="process.html" method="get">
-		<label for="choice_1">Choice 1</label>
-		<input type="text" placeholder="PS4" required id="choice_1" class="form"/>
-		
-		<label for="choice_2">Choice 2</label>
-		<input type="text" placeholder="XBOX ONE" required id="choice_2" class="form"/>
-		
-		<button class="btn">Submit</button>
-		
-		</form>
+			<form action="process.html" method="get">
+				<label for="choice_1" class="choice_label">Choice 1</label>
+				<input type="text" placeholder="Enter choice 1" required id="choice_1" class="form" />
+
+				<label for="choice_2" class="choice_label">Choice 2</label>
+				<input type="text" placeholder="Enter choice 2" required id="choice_2" class="form" />
+				<div id="interaction_container" class="interaction">
+
+				</div>
+
+				<div id="action_container">
+					<button class="btn submit_button" type="submit" id="submit_choices">Submit</button>
+					<button class="btn add_button" type="button" id="add_choices">Add Choices</button>
+				</div>
+
+
+			</form>
 		</div>
 	</div>
 	<!--  end of exp code   -->
@@ -80,8 +87,8 @@
         window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')
 
     </script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>-->
+    <script src="js/plugins.js"></script>-->
+	<script src="js/main.js"></script>
 
 </body>
 
