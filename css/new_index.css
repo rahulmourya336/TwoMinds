@@ -53,6 +53,7 @@ html {
     text-align: center;
     background-color: lightcyan;
     height: 100%;
+    position: relative;
 }
 
 .interaction {
@@ -63,6 +64,7 @@ html {
     background-color: bisque;
     height: 100%;
     padding: 1em 0 0 0;
+    position: relative;
 }
 
 .small__logo {
@@ -99,14 +101,34 @@ input {
 }
 
 .link {
+    position: absolute;
     bottom: 0;
     padding: 1em;
-    margin: 10em 0 0 0;
-    background-color: wheat;
+    background-color: wheat;    
+    width: 100%;
 }
 .link > a {
     padding: 2em;
     font-size: large;
+}
+
+.link > a:hover {
+    text-decoration: none;
+}
+
+.action__buttons {
+    position: absolute;
+    bottom: 0;
+    margin: 0 0 0.8em 0.8em;
+    width: 90%;
+}
+.input-group { 
+    margin: 2em 0 0 0;
+}
+
+#add__textbox {
+    float: right;
+    font-size: larger;
 }
 
 @media screen and (max-width:400px) {
