@@ -76,6 +76,14 @@ html {
 
 .check__multiple {
     float: right;
+    display: block;
+}
+
+#input__container {
+    clear: right;
+    width: 70%;
+    margin: 0 0 0 1em;
+    display: block;
 }
 
 form {
@@ -88,6 +96,17 @@ input {
 
 #action_container {
     padding-top: 1em;
+}
+
+.link {
+    bottom: 0;
+    padding: 1em;
+    margin: 10em 0 0 0;
+    background-color: wheat;
+}
+.link > a {
+    padding: 2em;
+    font-size: large;
 }
 
 @media screen and (max-width:400px) {
