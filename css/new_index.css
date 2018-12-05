@@ -17,6 +17,13 @@ html {
     margin: 0.5em 0 0 0;
 }
 
+.illustration {
+    float: left;
+    display: inline-block;
+    height: 39em;
+    width: 39em;
+}
+
 .logo {
     margin-top: 3em;
     width: 15em;
@@ -61,5 +68,12 @@ input {
     .logo {
         margin-top: 4em;
         width: 10em;
-    }  
+    }
+
+}
+
+@media screen and (max-width:980px) {
+    .illustration {
+        display: none;
+    }
 }
