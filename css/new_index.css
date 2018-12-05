@@ -1,6 +1,7 @@
 html {
     box-sizing: border-box !important;
     transition: box-shadow 0.5s ease;
+    transition: display 1.0s ease;
     
 }
 
@@ -12,6 +13,10 @@ html {
     box-shadow: 0 8px 6px -6px grey;
      
 }
+
+/**
+* Get Started Styles
+*/
 
 .greeting__message {
     margin: 0.5em 0 0 0;
@@ -26,7 +31,7 @@ html {
 
 .logo {
     margin-top: 3em;
-    width: 15em;
+    width: 17em;
 }
 
 .greeting, .submit{
@@ -38,18 +43,34 @@ html {
     padding: 2em 0 3em 0;
 }
 
-#get__started {
-    
-}
-
+/**
+* Choose Quantity styles
+*/
 .instructions {
     border: 1px solid;
-    background: url("http://via.placeholder.com/200x200") no-repeat;
-    display: inline-block;
+    width: 50%;
+    float: left;
+    text-align: center;
+    background-color: lightcyan;
+    height: 100%;
 }
 
 .interaction {
+    border: 1px solid;
+    width: 50%;
+    float: right;
+    padding: 0 0 0 1em;
+    background-color: bisque;
+    height: 100%;
+}
 
+.small__logo {
+    width: 12em;
+    margin: 5em 0 0 0;
+}
+
+.instructions__message {
+    margin: 1em 0 0 0; 
 }
 
 form {
