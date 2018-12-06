@@ -59,7 +59,7 @@
         <div class="interaction">
             <div class="form-group check__multiple">
                 <label class="form-checkbox form-inline">
-                    <input type="checkbox" checked=""><i class="form-icon"></i> Multiple Choices
+                    <input type="checkbox" checked="" name="checkbox"><i class="form-icon"></i> Multiple Choices
                 </label>
             </div>
 
@@ -68,19 +68,19 @@
                 <div class="text__box">
                     <div class="input-group" id="1">
                         <span class="input-group-addon addon-lg">Choice 1</span>
-                        <input type="text" class="form-input input-lg" placeholder="Subway">
+                        <input type="text" class="form-input input-lg" placeholder="Subway" name="choice1" required="">
                     </div>
 
                     <div class="input-group" id="2">
                             <span class="input-group-addon addon-lg">Choice 2</span>
-                            <input type="text" class="form-input input-lg" placeholder="Mc Donalds">
+                            <input type="text" class="form-input input-lg" placeholder="Mc Donalds" name="choice2" required="">
                         </div>
                     </div>
          
             <div class="action__buttons">
                     <button class="btn btn-primary" type="submit">Submit<i class="icon icon-arrow-right"></i></button>
                     <button class="btn" type="reset">Reset</button>
-                    <button class="btn btn-action s-circle btn-lg" id="add__textbox"><i class="icon icon-plus"></i></button>
+                    <button class="btn btn-action s-circle btn-lg" id="add__textbox" type="button" onclick="addTextBox()" ><i class="icon icon-plus"></i></button>
                 </div>
                 </form>
             </div>
