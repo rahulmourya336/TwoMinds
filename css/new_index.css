@@ -6,7 +6,7 @@ html {
 }
 
 #container {
-    border: 1px dotted;
+    /* border: 1px dotted; */
     margin: 0 auto;
     width: 90%;
     height: 35em;
@@ -44,10 +44,10 @@ html {
 }
 
 /**
-* Choose Quantity styles
+* Enter Options
 */
 .instructions {
-    border: 1px solid;
+    /* border: 1px solid; */
     width: 50%;
     float: left;
     text-align: center;
@@ -57,7 +57,7 @@ html {
 }
 
 .interaction {
-    border: 1px solid;
+    /* border: 1px solid; */
     width: 50%;
     float: right;
     padding: 0 0 0 1em;
@@ -130,6 +130,32 @@ input {
     float: right;
     font-size: larger;
 }
+
+#error__message, #error__message:hover {
+    color: red;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
 
 @media screen and (max-width:400px) {
     .logo {

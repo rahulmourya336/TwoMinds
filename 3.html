@@ -64,27 +64,25 @@
             </div>
 
             <div id="input__container">
-                <form action="3.html" id="choiceInput">
-                    <div id="text__box">
-                        <div class="input-group" id="1">
-                            <span class="input-group-addon addon-lg">Choice 1</span>
-                            <input type="text" class="form-input input-lg" placeholder="Subway" name="choice1" required="" maxlength="20" id="_1">
-                        </div>
-
-                        <div class="input-group" id="2">
-                            <span class="input-group-addon addon-lg">Choice 2</span>
-                            <input type="text" class="form-input input-lg" placeholder="Mc Donalds" name="choice2"
-                                required="" maxlength="20" id="_2">
-                        </div>
-                        <div id="extras"></div>
+                <form action="3.html">
+                <div id="text__box">
+                    <div class="input-group" id="1">
+                        <span class="input-group-addon addon-lg">Choice 1</span>
+                        <input type="text" class="form-input input-lg" placeholder="Subway" name="choice1" required="">
                     </div>
-
-                    <div class="action__buttons">
-                        <button class="btn btn-primary" type="submit" onsubmit="event.preventDefault(); validateData()">Submit<i class="icon icon-arrow-right"></i></button>
-                        <button class="btn" type="reset">Reset</button>
-                        <button class="btn btn-action s-circle btn-lg" id="add__textbox" type="button" onclick="addTextBox()"><i
-                                class="icon icon-plus"></i></button>
+                
+                    <div class="input-group" id="2">
+                        <span class="input-group-addon addon-lg">Choice 2</span>
+                        <input type="text" class="form-input input-lg" placeholder="Mc Donalds" name="choice2" required="">
                     </div>
+                <div id="extras"></div>
+                </div>
+                
+            <div class="action__buttons">
+                    <button class="btn btn-primary" type="submit">Submit<i class="icon icon-arrow-right"></i></button>
+                    <button class="btn" type="reset">Reset</button>
+                    <button class="btn btn-action s-circle btn-lg" id="add__textbox" type="button" onclick="addTextBox()" ><i class="icon icon-plus"></i></button>
+                </div>
                 </form>
             </div>
         </div>
