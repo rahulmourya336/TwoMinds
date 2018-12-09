@@ -157,6 +157,30 @@ input {
     }
   }
 
+  #canvas {
+    height: 100% !important;
+    width: 100% !important;
+    -webkit-filter: blur(0px);
+}
+
+#choice__output {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 30%;
+    margin: 17% 0 0 0;
+    color: white;
+}
+
+.icon-back {
+    clear: both !important;
+}
+
+.action {
+    clear: both;
+    text-align: center;
+}
+
 @media screen and (max-width:400px) {
     .logo {
         margin-top: 4em;

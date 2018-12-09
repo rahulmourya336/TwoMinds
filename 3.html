@@ -27,6 +27,7 @@
 
     <!--  Stylesheets  -->
     <link rel="stylesheet" href="./css/main.css" />
+    <script src="js/main.js"></script>
 
 
     <!--  Todo: Add Google Anlytics here  -->
@@ -37,7 +38,7 @@
     <link rel="stylesheet" href="css/normalize.css">
 </head>
 
-<body>
+<body onload="validateLocalStorage()">
     <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
@@ -45,61 +46,158 @@
     <!-- Enter Options  -->
 
     <div id="container">
-        <div class="instructions">
-            <img src="./assets/v2.png" alt="logo" class="small__logo">
-            <h3 class="instructions__message"><kbd>Enter your choices</kbd></h3>
-            <blockquote id="error__message"></blockquote>
-            <div class="link">
-                <a href="About.html">About</a>
-                <a href="feedback.html">Feedback</a>
-                <a href="https://github.com/rahulmourya336/TwoMinds">Github</a>
+        <canvas id="canvas"></canvas>
+        <div id="choice__output">
+            <h1>This might be the good choice for you!</h1>
+            <kbd id="choice">
+                <script>
+                    shuffleChoice();
+                </script>
+            </kbd>
+            <div class="action">
+                <button class="btn btn-action s-circle btn-lg" id="add__textbox" type="button"><i class="icon icon-back"></i></button>
+                <button class="btn btn-action s-circle btn-lg" id="add__textbox" type="button" onclick="shuffleChoice()"><i
+                        class="icon icon-refresh"></i></button>
             </div>
         </div>
-
-        <div class="interaction">
-            <div class="form-group check__multiple">
-                <label class="form-checkbox form-inline">
-                    <input type="checkbox" checked="" name="checkbox"><i class="form-icon"></i> Multiple Choices
-                </label>
-            </div>
-
-            <div id="input__container">
-                <form action="3.html">
-                <div id="text__box">
-                    <div class="input-group" id="1">
-                        <span class="input-group-addon addon-lg">Choice 1</span>
-                        <input type="text" class="form-input input-lg" placeholder="Subway" name="choice1" required="">
-                    </div>
-                
-                    <div class="input-group" id="2">
-                        <span class="input-group-addon addon-lg">Choice 2</span>
-                        <input type="text" class="form-input input-lg" placeholder="Mc Donalds" name="choice2" required="">
-                    </div>
-                <div id="extras"></div>
-                </div>
-                
-            <div class="action__buttons">
-                    <button class="btn btn-primary" type="submit">Submit<i class="icon icon-arrow-right"></i></button>
-                    <button class="btn" type="reset">Reset</button>
-                    <button class="btn btn-action s-circle btn-lg" id="add__textbox" type="button" onclick="addTextBox()" ><i class="icon icon-plus"></i></button>
-                </div>
-                </form>
-            </div>
-        </div>
-
     </div>
 
     <!--  end of Enter Options   -->
+    <script>
+        const SPEED = 30;
 
+        // canvas setup
+        const canvas = document.getElementById('canvas');
+        // const dpr = window.devicePixelRatio || 1;
+        const dpr = .5;
+        const ctx = canvas.getContext('2d');
+        ctx.font = '48px serif';
+        ctx.textAlign = 'left';
+        ctx.strokeText('Choice Output', 0, 100);
 
-    <!--    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>-->
-    <!--    <script>
-        window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
+        });
+
+        let mousePos = {
+            x: canvas.width / 5,
+            y: 0,
+        };
+
+        let WARP = false;
+
+        class Confetti {
+            constructor(x, y, ctx) {
+                const dpr = window.devicePixelRatio || 1;
+                this.x = x * dpr;
+                this.y = y * dpr;
+
+                this.vx = scaleBetween(x, WARP ? -WARP * dpr : -SPEED * dpr, WARP ? WARP * dpr : SPEED * dpr, 0, canvas.width / 2);
+                this.vy = scaleBetween(y, WARP ? -WARP * dpr : -SPEED * dpr, WARP ? WARP * dpr : SPEED * dpr, 0, canvas.height / 2);
+
+                this.ctx = ctx;
+
+                // confetti parameters
+                this.r = 0.1;
+                this.d = 10 * dpr;
+                this.ratio = this.r < this.d ? this.r / this.d : this.d / this.r;
+
+                this.colors = ['#b8b74d', '#5658fc', '#56c8fc', '#eecee6', '#a8d99c', '#f0261d', '#92a0fd', '#f8c265', '#df642f', '#d5a446'];
+                this.color = this.colors[Math.floor(this.colors.length * Math.random())];
+
+                this.angle = 4 * dpr;
+                this.tilt = Math.random();
+                this.tiltAngle = Math.random();
+                this.tiltAngleIncremental = 0.001 * Math.random();
+            }
+
+            drawConfetti() {
+                this.ctx.beginPath();
+                this.ctx.lineWidth = this.d / 2;
+                this.ctx.strokeStyle = this.color;
+                this.ctx.moveTo(this.x + this.tilt + this.r, this.y);
+                this.ctx.lineTo(this.x + this.tilt, this.y + this.tilt + this.r);
+                this.ctx.stroke();
+
+                this.updateConfettiParticle();
+            }
+
+            updateConfettiParticle() {
+                this.vx = scaleBetween(this.x, WARP ? -WARP * dpr : -SPEED * dpr, WARP ? WARP * dpr : SPEED * dpr, mousePos.x - canvas.width, mousePos.x + canvas.width);
+                this.vy = scaleBetween(this.y, WARP ? -WARP * dpr : -SPEED * dpr, WARP ? WARP * dpr : SPEED * dpr, mousePos.y - canvas.height, mousePos.y + canvas.width);
+
+                const tiltAngle = 0.005 * this.d;
+                this.r = this.r > 20 ? this.r : this.r + 0.03; // max 10
+
+                this.angle += 0.1;
+                this.tiltAngle += tiltAngle;
+                this.tiltAngle += this.tiltAngleIncremental;
+                this.tilt = (Math.sin(this.tiltAngle - (this.r / 2))) * this.r * 2;
+                this.y += Math.sin(this.angle + this.r / 2) * 2;
+                this.x += Math.sin(this.angle) / 2;
+                this.x += this.vx;
+                this.y += this.vy;
+            }
+        }
+
+        const confettis = [];
+
+        for (let i = 0; i < 20; i++) {
+            addConfettiParticle();
+        }
+
+        function addConfettiParticle() {
+            const x = window.innerWidth * Math.random();
+            const y = window.innerHeight * Math.random();
+            const c = new Confetti(x, y, ctx);
+            confettis.push(c);
+        }
+
+        function draw() {
+            const offset = 100;
+            const gradient = ctx.createRadialGradient(mousePos.x, mousePos.y, canvas.width, mousePos.x, mousePos.y, 0);
+
+            gradient.addColorStop(0, '#010121');
+            gradient.addColorStop(1, '#321234');
+            ctx.fillStyle = gradient;
+
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            confettis.forEach((confetti, i) => {
+                confetti.drawConfetti();
+                if (confetti.x < -offset ||
+                    confetti.y < -offset ||
+                    confetti.x > canvas.width + offset ||
+                    confetti.y > canvas.height + offset) {
+                    confetti.dead = true;
+                }
+            });
+
+            confettis.forEach((confetti, i) => {
+                if (confetti.dead) {
+                    confettis.splice(i, 1);
+                    addConfettiParticle();
+                }
+            });
+
+            window.requestAnimationFrame(draw);
+        }
+
+        function scaleBetween(unscaledNum, minAllowed, maxAllowed, min, max) {
+            return (maxAllowed - minAllowed) * (unscaledNum - min) / (max - min) + minAllowed;
+        }
+
+        draw();
 
     </script>
-    <script src="js/plugins.js"></script>-->
-    <script src="js/main.js"></script>
 
 </body>
 

@@ -1,22 +1,4 @@
-let checkbox = document.querySelector("input[name=checkbox]");
 
-checkbox.addEventListener('change', function () {
-    if (this.checked) {
-        x = document.getElementById("add__textbox");
-        x.hidden = false;
-    } else {
-        x = document.getElementById("add__textbox");
-        /**
-         * Hides Checkboxes too
-         */
-        x_ = document.getElementById("extras");
-        length = x_.querySelectorAll(".input-group").length
-        for (let z = 0; z < length; z++) {
-            x_.querySelector(".input-group").remove()
-        }
-        x.hidden = true;
-    }
-});
 
 let addTextBox = _ => {
     let addTextboxBtn = document.querySelector("add__textbox");
@@ -46,9 +28,9 @@ let addTextBox = _ => {
 }
 
 let validateData = _ => {
-    console.log("inside validate function");
     let choice1 = document.getElementById('_1').value;
     let choice2 = document.getElementById('_2').value;
+    
     let choices = [choice1, choice2];
     y = document.getElementById("extras");
     length = y.querySelectorAll(".input-group").length;
@@ -56,4 +38,20 @@ let validateData = _ => {
         choices.push(document.getElementById(`_${z + 3}`).value)
     }
     console.log("Your Choices", choices);
+    localStorage.setItem('choices', choices);
+    window.location.href = '3.html';
+}
+
+let validateLocalStorage = _ => {
+    if (!localStorage.getItem('choices')) {
+        window.location.href = '2.html';
+    }
+}
+
+let shuffleChoice = _ => {
+    let temp = localStorage.getItem('choices');
+    temp = [...temp].filter(words => words !== ',');
+    let randomValue = Math.floor(Math.random() * temp.length) + 1;
+    console.log(randomValue);
+    document.getElementById('choice').innerHTML = temp[randomValue - 1];
 }
